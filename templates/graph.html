@@ -7,38 +7,73 @@
 	<title>Hello World</title>
 </head>
 <body>
-	<div>
+
+	<div id="form_input">
+		<form method="POST">
+			<p>X-Value</p>
+			<select name='X-Value'>
+				<option>{{x_name}}</option>
+				<option value="date">date</option>
+				<option value="sales">sales</option>
+				<option value="stock">stock</option>
+				<option value="price">price</option>	
+			</select>
+			<br>
+			<p>Y-Value</p>
+			<select name='Y-Value'>
+				<option>{{y_name}}</option>
+				<option value="date">date</option>
+				<option value="sales">sales</option>
+				<option value="stock">stock</option>
+				<option value="price">price</option>
+			</select>
+			<br><br>
+			<input type="submit" id="getGraph" onclick="toggle()">
+		</form>	
+	</div>
+
+	<div id='canvass' style="display:block;">
 		<canvas id="priceChart" width="1000" height="750"></canvas>
 	</div>
 
 	<script>
-
-	  const data = {
-	    labels: {{ date | safe }},
-	    datasets: [{
-	      label: 'Price Graph',
-	      backgroundColor: 'rgb(255, 99, 132)',
-	      borderColor: 'rgb(255, 99, 132)',
-	      lineTension:0.1,
-	      data: {{ sales | safe }},
-	    }]
-	  };
-
-	  const config = {
-	    type: 'line',
-	    data: data,
-	    options: {
-	    	responsive:false
-	    }
-	  };
-	</script>
+		function toggle() {
+			var myCanvas = document.getElementById('canvass');
+			myCanvas.style.display='block';
+		}
 
 
-	<script>
+		const data = {
+		    labels: {{ x_data | safe }},
+		    datasets: [{
+		      label: {{ labelX | tojson }},
+		      backgroundColor: 'rgb(255, 99, 132)',
+		      borderColor: 'rgb(255, 99, 132)',
+		      lineTension:0.1,
+		      data: {{ y_data | safe }},
+		    }]
+	  	};
+
+	  	const config = {
+		    type: 'line',
+		    data: data,
+		    options: {
+		    	responsive:false
+		    }
+	  	};
+	
+
+
+
+
+
+
+
+
 	  const priceChart = new Chart(document.getElementById('priceChart'),config);
 	</script>
 
 
-	<h1>Hello Hello</h1>
+<!-- 	<h1>Hello Hello</h1> -->
 </body>
 </html>
