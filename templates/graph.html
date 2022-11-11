@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<title>Hello World</title>
+</head>
+<body>
+	<div>
+		<canvas id="priceChart" width="1000" height="750"></canvas>
+	</div>
+
+	<script>
+
+	  const data = {
+	    labels: {{ date | safe }},
+	    datasets: [{
+	      label: 'Price Graph',
+	      backgroundColor: 'rgb(255, 99, 132)',
+	      borderColor: 'rgb(255, 99, 132)',
+	      lineTension:0.1,
+	      data: {{ sales | safe }},
+	    }]
+	  };
+
+	  const config = {
+	    type: 'line',
+	    data: data,
+	    options: {
+	    	responsive:false
+	    }
+	  };
+	</script>
+
+
+	<script>
+	  const priceChart = new Chart(document.getElementById('priceChart'),config);
+	</script>
+
+
+	<h1>Hello Hello</h1>
+</body>
+</html>
