@@ -30,7 +30,7 @@
                 <a class="nav-link" href="javascript:void(0);"><i class="far fa-address-book"></i>Dashboard</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="javascript:void(0);"><i class="far fa-clone"></i>Components</a>
+                <a class="nav-link" href="/lol"><i class="far fa-clone"></i>Components</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="javascript:void(0);"><i class="far fa-calendar-alt"></i>Calendar</a>
@@ -46,12 +46,14 @@
 </nav>
 
 	<div>
+		<br>
 		<h1><center>Welcome Home !</center></h1>
 	</div>
-	<div id="form_input">
+	<div class="d-inline-flex flex-row">
+	<div class="pl-5" id="form_input">
 		<form method="POST">
 			<p>X-Value</p>
-			<select name='X-Value'>
+			<select class="form-control" name='X-Value'>
 				<option>{{x_name}}</option>
 				<option value="date">date</option>
 				<option value="sales">sales</option>
@@ -60,21 +62,25 @@
 			</select>
 			<br>
 			<p>Y-Value</p>
-			<select name='Y-Value'>
-				<option>{{y_name}}</option>
-				<option value="date">date</option>
-				<option value="sales">sales</option>
-				<option value="stock">stock</option>
-				<option value="price">price</option>
-			</select>
+				<select class="form-control" name='Y-Value'>
+					<option>{{y_name}}</option>
+					<option value="date">date</option>
+					<option value="sales">sales</option>
+					<option value="stock">stock</option>
+					<option value="price">price</option>	
+				</select>
 			<br><br>
 			<input type="submit" id="getGraph" value="Get Graph" onclick="toggle()">
 		</form>	
 	</div>
 
-	<div id='canvass' style="display:block;">
-		<canvas id="priceChart" width="1000" height="750"></canvas>
+	<div id='canvass' class="pl-5">
+		<canvas id="priceChart" width="1000" height="400"></canvas>
 	</div>
+	<div class ="overflow-auto px-auto">
+		<p>Insights</p>
+	</div>
+</div>
 
 	<script>
 		function toggle() {
