@@ -91,10 +91,6 @@ def logout():
     session.pop('username', None)
     return redirect(url_for('login'))
 
-@app.route("/dash")
-def base():
-	return render_template("dash.html")
-
 @app.route('/register', methods =['GET', 'POST'])
 def register():
     msg = ''
@@ -121,8 +117,9 @@ def register():
         msg = 'Please fill out the form !'
     return render_template('register.html', msg = msg)
 
-
-
+@app.route("/dash")
+def base():
+	return render_template("dash.html")
 
 
 
