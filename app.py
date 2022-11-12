@@ -11,11 +11,39 @@ import re
 d={}
 data = pd.read_excel("./data/dataset.xlsx")
 # print(data)
-d['price'] = list(data['preco'])[:20]
-d['sales'] = list(data['venda'])[:20]
-d['stock'] = list(data['estoque'])[:20]
-unformatted_date = list(data['date'])[:20]
+d['price'] = list(data['preco'])
+d['sales'] = list(data['venda'])
+d['stock'] = list(data['estoque'])
+unformatted_date = list(data['date'])
 d['date'] = [i.strftime('%Y-%m-%d') for i in unformatted_date]
+
+months={
+	"Jan":'01',
+	"Feb":'02',
+	"Mar":'03',
+	"Apr":'04',
+	"May":'05',
+	"Jun":'06',
+	"Jul":'07',
+	"Aug":'08',
+	"Sep":'09',
+	"Oct":'10',
+	"Nov":'11',
+	"Dec":'12'
+}
+
+xx = d['date']
+print(xx[:40])
+print()
+req = [i for i in xx if i[5:7]==months['Jan'] and i[:4]=='2014' ]            # 8:10 for day    0:4 for year
+startIndex = xx.index(req[0])
+endIndex = xx.index(req[-1])
+
+print(startIndex,endIndex)
+
+print(d['sales'][startIndex:endIndex+1])
+
+
 
 
 app = Flask(__name__)
@@ -33,21 +61,7 @@ mysql = MySQL(app)
 
 @app.route("/")
 def home(): 
-
-	# data = pd.read_excel("./data/dataset.xlsx")
-	# # print(data)
-
-	# price = list(data['preco'])[:20]
-	# sales = list(data['venda'])[:20]
-	# stock = list(data['estoque'])[:20]
-	# unformatted_date = list(data['date'])[:20]
-	# date = [i.strftime('%Y-%m-%d') for i in unformatted_date]
-	
-	# price=d["price"],sales=d["sales"],date=d["date"],stock=d["stock"]
-
 	return render_template("graph.html",labelX='None',x_data=[],y_data=[])
-
-
 
 @app.route("/",methods=["POST"])
 def form_input():
@@ -61,6 +75,8 @@ def form_input():
 	labelX = str(x+"-"+y+" graph")
 
 	return render_template("graph.html",x_data=d[x],y_data=d[y],x_name=x,y_name=y,labelX=labelX)
+
+
 
 
 #login and registration 
