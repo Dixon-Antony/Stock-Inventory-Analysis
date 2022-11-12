@@ -102,7 +102,7 @@ def register():
         cursor.execute('SELECT * FROM users WHERE username = % s', (username, ))
         account = cursor.fetchone()
         if account:
-            msg = 'Account already ists !'
+            msg = 'Account already exists !'
         elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
             msg = 'Invalid email address !'
         elif not re.match(r'[A-Za-z0-9]+', username):
