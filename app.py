@@ -75,6 +75,11 @@ app.config['MYSQL_DB'] = 'rssia'
 mysql = MySQL(app)
 
 
+#home
+@app.route ('/')
+def home():
+    return render_template('home.html')
+
 
 #login and registration 
 
@@ -148,7 +153,7 @@ def register():
 
 #Unwanted
 
-@app.route("/dash")
+@app.route("/dashTemp")
 def base():
 	return render_template("dash.html")
 
@@ -156,8 +161,8 @@ labelX = 'Date-Sales graph (overall)'
 
 #dashboard
 
-@app.route("/")
-def home():
+@app.route("/dash")
+def dashboard():
 
     current_x = str(session.get('X'))
     current_y = str(session.get('Y'))
@@ -171,7 +176,7 @@ def home():
         return render_template("graph.html",labelX=labelX,x_data=d['date'],y_data=d['sales'],x_name='date',y_name='sales',most_sales=most_sales_date+" ("+most_sales_count+")",least_sales=least_sales_date,most_stock=most_stock_date+" ("+most_stock_count+")",avg_price=avg_stock_price)
 
 
-@app.route("/",methods=["POST"])
+@app.route("/dash",methods=["POST"])
 def form_input():
 
     x = request.form['X-Value']

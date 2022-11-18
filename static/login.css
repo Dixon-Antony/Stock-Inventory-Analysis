@@ -1,3 +1,7 @@
+*{
+  font-family: 'Maiandra GD';
+}
+
 #login-form {
     --primary: #6d58ff;
     --primary-dark: #362a89;

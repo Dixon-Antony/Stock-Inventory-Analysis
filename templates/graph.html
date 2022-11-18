@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js">
+	
 	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.css">
@@ -17,7 +22,7 @@
 <body>
 	
 <nav class="navbar navbar-expand-custom navbar-mainbg">
-    <a class="navbar-brand navbar-logo" href="#">DjSiRS </a>
+    <a class="navbar-brand navbar-logo" href="#">RSSIA </a>
     <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <i class="fas fa-bars text-white"></i>
     </button>
@@ -25,7 +30,7 @@
         <ul class="navbar-nav ml-auto">
             <div class="hori-selector"><div class="left"></div><div class="right"></div></div>
             <li class="nav-item">
-                <a class="nav-link" href="javascript:void(0);"><i class="fas fa-tachometer-alt"></i>Home</a>
+                <a class="nav-link" href="/"><i class="fas fa-tachometer-alt"></i>Home</a>
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="javascript:void(0);"><i class="far fa-address-book"></i>Dashboard</a>
@@ -34,10 +39,7 @@
                 <a class="nav-link" href="/visuals"><i class="fa-solid fa-chart-line"></i>Visualizations</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="javascript:void(0);"><i class="far fa-calendar-alt"></i>Calendar</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="javascript:void(0);"><i class="far fa-chart-bar"></i>Charts</a>
+                <a class="nav-link" href="javascript:void(0);"><i class="far fa-calendar-alt"></i>Report</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/logout"><i class="fa-solid fa-power-off"></i>Logout</a>
@@ -49,16 +51,16 @@
 <div class="d-flex flex-row">
 	<div class="pl-5" id="form_input">
 	<form method="POST">
-		<p>X-Value</p>
-		<select class="form-control" name='X-Value'>
-			<option style="color:green">{{x_name}}</option>
-			<option value="date">date</option>
-			<option value="sales">sales</option>
-			<option value="stock">stock</option>
-			<option value="price">price</option>	
-		</select>
+		<p>X - Value</p>
+			<select class="form-control" name='X-Value'>
+				<option style="color:green">{{x_name}}</option>
+				<option value="date">date</option>
+				<option value="sales">sales</option>
+				<option value="stock">stock</option>
+				<option value="price">price</option>	
+			</select>
 		<br>
-		<p>Y-Value</p>
+		<p>Y - Value</p>
 			<select class="form-control" name='Y-Value'>
 				<option style="color:green">{{y_name}}</option>
 				<option value="date">date</option>
@@ -67,15 +69,15 @@
 				<option value="price">price</option>	
 			</select>
 		<br><br>
-		<input type="submit" id="getGraph" value="Get Graph">
+		<!-- <input type="submit" id="getGraph" value="Get Graph"> -->
+		<button type="submit" id="getGraph" value="Get Graph" style="font-family: 'Maiandra GD';font-size: 15px;">Get Graph</button>
 	</form>	
 	</div>
 
 	&nbsp;
 	&nbsp;
 	&nbsp;
-	&nbsp;
-	&nbsp;
+
 
 	<div id='canvass' style='border: 1px solid red;padding: 30px;'>
 		<canvas id="commonChart" width="900" height="400"></canvas>
@@ -84,8 +86,7 @@
 	&nbsp;
 	&nbsp;
 	&nbsp;
-	&nbsp;
-	&nbsp;
+
 	
 	<div class ="overflow-auto px-auto" style='border: 1px solid red;padding: 30px;'>
 	<h2>Insights</h2>
@@ -135,4 +136,6 @@
 
 <!-- 	<h1>Hello Hello</h1> -->
 </body>
+
+
 </html>

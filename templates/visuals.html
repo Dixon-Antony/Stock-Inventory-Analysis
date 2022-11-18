@@ -18,7 +18,7 @@
 <body>
 	
 <nav class="navbar navbar-expand-custom navbar-mainbg">
-    <a class="navbar-brand navbar-logo" href="#">DjSiRS </a>
+    <a class="navbar-brand navbar-logo" href="#">RSSIA </a>
     <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <i class="fas fa-bars text-white"></i>
     </button>
@@ -26,19 +26,16 @@
         <ul class="navbar-nav ml-auto">
             <div class="hori-selector"><div class="left"></div><div class="right"></div></div>
             <li class="nav-item">
-                <a class="nav-link" href="javascript:void(0);"><i class="fas fa-tachometer-alt"></i>Home</a>
+                <a class="nav-link" href="/"><i class="fas fa-tachometer-alt"></i>Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/"><i class="far fa-address-book"></i>Dashboard</a>
+                <a class="nav-link" href="/dash"><i class="far fa-address-book"></i>Dashboard</a>
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="javascript:void(0);"><i class="fa-solid fa-chart-line"></i>Visualizations</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="javascript:void(0);"><i class="far fa-calendar-alt"></i>Calendar</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="javascript:void(0);"><i class="far fa-chart-bar"></i>Charts</a>
+                <a class="nav-link" href="javascript:void(0);"><i class="far fa-calendar-alt"></i>Report</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/logout"><i class="fa-solid fa-power-off"></i>Logout</a>
@@ -54,7 +51,7 @@
 		<form method="POST">
 			<label class = "">Month</label>
 			<select class="form-control" name='Month'>
-				<option style="color:green">{{xx_name}}</option>
+				<option>{{xx_name}}</option>
 				<option value="Jan">Jan</option>
 				<option value="Feb">Feb</option>
 				<option value="Mar">Mar</option>
@@ -77,7 +74,8 @@
 					<option value="2016">2016</option>	
 				</select>
 			<br><br>
-			<input type="submit" id="getSales" value="Get Graphs">
+			<!-- <input type="submit" id="getSales" value="Get Graphs"> -->
+			<button type="submit" id="getSales" value="Get Graphs" style="font-family: 'Maiandra GD';font-size: 15px;">Visualize</button>
 		</form>
 	</div>
 	
@@ -102,11 +100,13 @@
 
 </div>
 
-	<div style='border: 1px solid red;margin:50px;padding: 30px;'>
-	<h2>Insights</h2>
+	<div style='border: 1px solid red; margin:20px; padding:30px;'>
+	<h3>Revenue as on {{xx_name}} {{yy_name}} </h3>
 	<br>
 	<h4 style="color:green">Monthly Revenue <i class="fa-solid fa-money-bill-trend-up"></i> : {{mon_rev}}</h4>
 	</div>
+	<br>
+	<br>
 
 
 
