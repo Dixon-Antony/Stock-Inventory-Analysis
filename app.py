@@ -33,6 +33,55 @@ months={
 }
 
 
+#Average Monthly Revenue
+
+combined_mon_rev = {}
+
+years = ['2014','2015']
+for k in years:
+    for j in (list(months.values())):
+        temp = d['date']
+        req = [i for i in temp if i[5:7]==j and i[:4]==k ]            # 8:10 for day    0:4 for year
+        startIndex = temp.index(req[0])
+        endIndex = temp.index(req[-1])
+
+        halo = d['sales'][startIndex:endIndex+1]
+        infinite = d['price'][startIndex:endIndex+1]
+
+        mon_rev = 1
+        for i in range(len(halo)):
+            mon_rev +=  float(halo[i])*float(infinite[i])
+        mon_rev = str(round(mon_rev,2))    
+
+        keyX = str(j)+"-"+str(k)
+
+        combined_mon_rev[keyX]=mon_rev 
+
+#for year 2016
+k='2016'
+for j in (list(months.values())[:7]):
+    temp = d['date']
+    req = [i for i in temp if i[5:7]==j and i[:4]==k ]            # 8:10 for day    0:4 for year
+    startIndex = temp.index(req[0])
+    endIndex = temp.index(req[-1])
+
+    halo = d['sales'][startIndex:endIndex+1]
+    infinite = d['price'][startIndex:endIndex+1]
+
+    mon_rev = 1
+    for i in range(len(halo)):
+        mon_rev +=  float(halo[i])*float(infinite[i])
+    mon_rev = str(round(mon_rev,2))    
+
+    keyX = str(j)+"-"+str(k)
+
+    combined_mon_rev[keyX]=mon_rev 
+
+# print(combined_mon_rev)
+avg_mon_rev = str(round(sum([ float(i) for i in list(combined_mon_rev.values())])/len(list(combined_mon_rev)),2))
+# print(avg_mon_rev)
+
+
 # temp = d['date']
 # print(temp[:40])
 # print()
@@ -58,7 +107,7 @@ most_stock_count = str(max(d['stock']))
 most_stock_index = d['stock'].index(max(d['stock']))
 most_stock_date = d['date'][most_stock_index]
  
-avg_stock_price = round(sum(d['price'])/len(d['price']),2)
+avg_stock_price = str(round(sum(d['price'])/len(d['price']),2))
 
 
 
@@ -170,10 +219,10 @@ def dashboard():
     print(current_x,"  ",current_y)
 
     if current_x!='None' or current_y!='None':
-        return render_template("graph.html",labelX=labelX,x_data=d[current_x],y_data=d[current_y],x_name=current_x,y_name=current_y,most_sales=most_sales_date+" "+most_sales_count,least_sales=least_sales_date,most_stock=most_stock_date+" ("+most_stock_count+")",avg_price=avg_stock_price)
+        return render_template("graph.html",labelX=labelX,x_data=d[current_x],y_data=d[current_y],x_name=current_x,y_name=current_y,most_sales=most_sales_date,most_sales_count=most_sales_count,least_sales=least_sales_date,most_stock=most_stock_date,most_stock_count=most_stock_count,avg_price=avg_stock_price)
 
     else:
-        return render_template("graph.html",labelX=labelX,x_data=d['date'],y_data=d['sales'],x_name='date',y_name='sales',most_sales=most_sales_date+" ("+most_sales_count+")",least_sales=least_sales_date,most_stock=most_stock_date+" ("+most_stock_count+")",avg_price=avg_stock_price)
+        return render_template("graph.html",labelX=labelX,x_data=d['date'],y_data=d['sales'],x_name='date',y_name='sales',most_sales=most_sales_date,most_sales_count=most_sales_count,least_sales=least_sales_date,most_stock=most_stock_date,most_stock_count=most_stock_count,avg_price=avg_stock_price)
 
 
 @app.route("/dash",methods=["POST"])
@@ -191,7 +240,7 @@ def form_input():
 
     labelX = str(x+"-"+y+" graph")
 
-    return render_template("graph.html",labelX=labelX,x_data=d[x],y_data=d[y],x_name=x,y_name=y,most_sales=most_sales_date+" ("+most_sales_count+")",least_sales=least_sales_date,most_stock=most_stock_date+" ("+most_stock_count+")",avg_price=avg_stock_price)
+    return render_template("graph.html",labelX=labelX,x_data=d[x],y_data=d[y],x_name=x,y_name=y,most_sales=most_sales_date,most_sales_count=most_sales_count,least_sales=least_sales_date,most_stock=most_stock_date,most_stock_count=most_stock_count,avg_price=avg_stock_price)
 
 
 
@@ -222,11 +271,9 @@ def visuals():
     mon_rev = 1
     for i in range(len(halo)):
         mon_rev +=  float(halo[i])*float(infinite[i])
-    mon_rev = round(mon_rev,2)
+    mon_rev = str(round(mon_rev,2))
 
-    print(mon_rev)
-
-    return render_template("visuals.html",xx_data=d['date'][startIndex:endIndex+1],yy_data=d['sales'][startIndex:endIndex+1],xxx_data=d['date'][startIndex:endIndex+1],yyy_data=d['stock'][startIndex:endIndex+1],xx_name='Jan',yy_name='2014',mon_rev=mon_rev)
+    return render_template("visuals.html",xx_data=d['date'][startIndex:endIndex+1],yy_data=d['sales'][startIndex:endIndex+1],xxx_data=d['date'][startIndex:endIndex+1],yyy_data=d['stock'][startIndex:endIndex+1],xx_name='Jan',yy_name='2014',mon_rev=mon_rev,avg_mon_rev=avg_mon_rev)
 
 
 @app.route("/visuals", methods =['GET', 'POST'])
@@ -247,7 +294,7 @@ def visuals_form():
     for i in range(len(halo)):
         mon_rev +=  float(halo[i])*float(infinite[i])
 
-    mon_rev = round(mon_rev,2)
+    mon_rev = str(round(mon_rev,2))
 
     xx_data = d['date'][startIndex:endIndex+1]
     yy_data = d['sales'][startIndex:endIndex+1]
@@ -261,5 +308,5 @@ def visuals_form():
     session['Mon_rev'] = mon_rev
 
 
-    return render_template("visuals.html",xx_data=xx_data,yy_data=yy_data,xxx_data=xx_data,yyy_data=yyy_data,xx_name=xx,yy_name=yy,mon_rev=mon_rev)
+    return render_template("visuals.html",xx_data=xx_data,yy_data=yy_data,xxx_data=xx_data,yyy_data=yyy_data,xx_name=xx,yy_name=yy,mon_rev=mon_rev,avg_mon_rev=avg_mon_rev)
 
